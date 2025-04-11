@@ -39,4 +39,25 @@ describe Board do
       end
     end
   end
+
+  describe '#display' do
+    it 'displays the board with placed pieces' do
+      board.place_piece(0, :red)
+      board.place_piece(1, :black)
+      board.place_piece(1, :red)
+
+      expected_display = <<~BOARD
+        | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+        |---|---|---|---|---|---|---|
+        |   |   |   |   |   |   |   |
+        |   |   |   |   |   |   |   |
+        |   |   |   |   |   |   |   |
+        |   |   |   |   |   |   |   |
+        |   | R |   |   |   |   |   |
+        | R | B |   |   |   |   |   |
+        |---|---|---|---|---|---|---|
+      BOARD
+      expect(board.display).to eq(expected_display)
+    end
+  end
 end
