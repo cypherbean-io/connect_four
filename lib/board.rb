@@ -17,6 +17,29 @@ class Board
     true
   end
 
+  # Need to refactor into smaller methods
+  def display
+    result = "| 0 | 1 | 2 | 3 | 4 | 5 | 6 |\n"
+    result += "|---|---|---|---|---|---|---|\n"
+
+    5.downto(0) do |row|
+      result += '|'
+      0.upto(6) do |col|
+        piece = @grid[col][row]
+        if piece.nil?
+          result += '   |'
+        else
+          marker = piece == :red ? ' R ' : ' B '
+          result += "#{marker}|"
+        end
+      end
+      result += "\n"
+    end
+
+    result += "|---|---|---|---|---|---|---|\n"
+    result
+  end
+
   private
 
   def valid_column?(column)
