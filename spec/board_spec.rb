@@ -10,7 +10,7 @@ describe Board do
       it 'places a piece at the bottom of an empty column' do
         column = 3
         board.place_piece(column, :red)
-        expect(board.grid[column][0]).to eq(piece)
+        expect(board.grid[column][0]).to eq(:red)
       end
 
       it 'stacks a piece on top of existing pieces' do
