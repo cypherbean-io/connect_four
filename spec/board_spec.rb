@@ -60,4 +60,95 @@ describe Board do
       expect(board.display).to eq(expected_display)
     end
   end
+
+  describe '#winning_move?' do
+    context 'when there are 4 in a row horizontally' do
+      it 'returns true' do
+        piece = :red
+        board.place_piece(0, piece)
+        board.place_piece(1, piece)
+        board.place_piece(2, piece)
+        board.place_piece(3, piece)
+        expect(board.winning_move?(3, piece)).to be true
+      end
+    end
+
+    context 'when there are 4 in a row vertically' do
+      it 'returns true' do
+        column = 3
+        piece = :red
+        4.times { board.place_piece(column, piece) }
+        expect(board.winning_move?(column, piece)).to be true
+      end
+    end
+
+    context 'when there are 4 in a row diagonally (upward)' do
+      it 'returns true' do
+        piece = :red
+        opposite = :black
+
+        # Set up the board:
+        # . . . . . . .
+        # . . . . . . .
+        # . . . R . . .
+        # . . R R . . .
+        # . R B B . . .
+        # R B B B . . .
+
+        board.place_piece(0, piece)
+        board.place_piece(1, opposite)
+        board.place_piece(1, piece)
+        board.place_piece(2, opposite)
+        board.place_piece(2, opposite)
+        board.place_piece(2, piece)
+        board.place_piece(3, opposite)
+        board.place_piece(3, opposite)
+        board.place_piece(3, piece)
+        board.place_piece(3, piece)
+
+        expect(board.winning_move?(3, piece)).to be true
+      end
+    end
+
+    context 'when there are 4 in a row diagonally (downward)' do
+      it 'returns true' do
+        piece = :red
+        opposite = :black
+
+        # Set up the board:
+        # . . . . . . .
+        # . . . . . . .
+        # R . . . . . .
+        # R R . . . . .
+        # B R R . . . .
+        # B B B R . . .
+
+        board.place_piece(0, opposite)
+        board.place_piece(0, opposite)
+        board.place_piece(0, piece)
+        board.place_piece(0, piece)
+        board.place_piece(1, opposite)
+        board.place_piece(1, piece)
+        board.place_piece(1, piece)
+        board.place_piece(2, opposite)
+        board.place_piece(2, piece)
+        board.place_piece(3, piece)
+
+        expect(board.winning_move?(3, piece)).to be true
+      end
+    end
+
+    context 'when there is no win' do
+      it 'returns false' do
+        piece = :red
+
+        board.place_piece(0, piece)
+        board.place_piece(1, piece)
+        board.place_piece(2, piece)
+        board.place_piece(4, piece)
+
+        expect(board.winning_move?(4, piece)).to be false
+      end
+    end
+  end
 end
