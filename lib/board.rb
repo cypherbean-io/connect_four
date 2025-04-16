@@ -70,6 +70,10 @@ class Board
     false
   end
 
+  def full?
+    @grid.all? { |column| column.all? { |cell| !cell.nil? } }
+  end
+
   private
 
   def valid_column?(column)
