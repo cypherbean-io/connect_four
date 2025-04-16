@@ -151,4 +151,24 @@ describe Board do
       end
     end
   end
+
+  describe '#full?' do
+    context 'when the board is not full' do
+      it 'returns false' do
+        expect(board.full?).to be false
+      end
+    end
+
+    context 'when the board is full' do
+      it 'returns true' do
+        # Fill up the board
+        7.times do |column|
+          6.times do
+            board.place_piece(column, :red)
+          end
+        end
+        expect(board.full?).to be true
+      end
+    end
+  end
 end
