@@ -74,8 +74,6 @@ class Board
     @grid.all? { |column| column.all? { |cell| !cell.nil? } }
   end
 
-  private
-
   def valid_column?(column)
     column.between?(0, 6)
   end
@@ -86,6 +84,8 @@ class Board
     end
     nil
   end
+
+  private
 
   def check_horizontal(column, row, piece)
     # Check to the left
